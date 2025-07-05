@@ -1,0 +1,27 @@
+.data 
+str: .asciiz "Arquitetura de Computadores"
+.text
+la $a0, str
+la $a1, str
+
+
+codifica_string:
+    lb $t0, 0($a0)
+    beq $t0, $zero, fim
+    addi $t0, $t0, 2
+    sb $t0, 0($a0)
+    addi $a0, $a0, 1
+    j codifica_string2
+
+codifica_string2:
+    lb $t0, 0($a0)
+    beq $t0, $zero, fim
+    addi $t0, $t0, -2
+    sb $t0, 0($a0)
+    addi $a0, $a0, 1
+    j codifica_string
+
+fim:
+    move $a0, $a1
+    li $v0, 4
+    syscall
